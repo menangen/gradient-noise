@@ -62,25 +62,30 @@ struct Gradient {
     }
 };
 
+struct Noise {
+    float freq;
+    float diff = 0.f;
+    
+    Noise (float freq = 1.0) {
+        this -> freq = freq;
+    };
+    
+    float
+    getValueAt (float x) {
+        return 2.0 * freq + x + diff;
+    };
+    
+    void diffuseWith(float x0) {
+        this -> diff += x0;
+    };
+};
+
 int main(int argc, const char * argv[]) {
     
-    float value = 4.55;
+    Noise perlin(2);
+    perlin.diffuseWith(1.0);
+    perlin.diffuseWith(2.0);
     
-    Gradient gradient = Gradient();
-    
-    gradient.size = 2;
-    
-    gradient.colors[0] = Color { -1.0, 0.08 };
-    gradient.colors[1] = Color {  0.0, 0.5    };
-    gradient.colors[2] = Color {  1.0, 1    };
-    
-    float c = gradient.getColorAt(value);
-    
-    if (c < 0.0799) {
-        std::cout << "Error, Gradient color = " << c << "!\n";
-    }
-    else { std::cout << "\nHello, Gradient!\n" << c << "\n"; }
-    
-    std::cout << "\n";
+    std::cout << perlin.getValueAt(1.0) << "\n";
     return 0;
 }
