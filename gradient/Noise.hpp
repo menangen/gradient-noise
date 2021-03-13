@@ -15,6 +15,23 @@
 #endif /* Noise_hpp */
 
 struct Noise {
+    struct NoiseSource {
+        enum Type { empty, perlin };
+
+        Type noiseType = empty;
+        
+        struct
+        Perlin noise = Perlin {};
+        
+        explicit
+        NoiseSource(struct Perlin noise) {
+            this -> noiseType = perlin;
+            this -> noise     = noise;
+        }
+        
+        explicit
+        NoiseSource() {};
+    };
     
     struct Module {
         enum Type { empty, perlinModule, invertModule };
@@ -23,15 +40,15 @@ struct Noise {
         Module() {};
         
         explicit
-        Module(struct Perlin perlin) {
-            this -> noiseSource = perlin;
+        Module(struct NoiseSource source) {
+            this -> noiseSource = source;
             this -> type        = perlinModule;
         };
         
         Type type = empty;
         
         struct
-        Perlin noiseSource = Perlin {};
+        NoiseSource noiseSource = NoiseSource {};
         
         void  printModuleType();
         float getValue() const;
@@ -42,7 +59,8 @@ struct Noise {
     
     explicit
     Noise(struct Perlin p) {
-        auto m = Module(p);
+        auto noiseSource = NoiseSource(p);
+        auto m = Module(noiseSource);
         this -> modules[0] = m;
     }
     
