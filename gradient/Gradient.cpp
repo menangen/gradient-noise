@@ -6,7 +6,6 @@
 //
 
 #include "Gradient.hpp"
-#include <iostream>
 
 struct Gradient {
     

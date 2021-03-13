@@ -8,9 +8,9 @@
 #ifndef Gradient_hpp
 #define Gradient_hpp
 
-#include <stdio.h>
+#include <iostream>
 
-#endif /* Gradient_hpp */
+#endif
 
 struct Color {
     float position = 0.0;
