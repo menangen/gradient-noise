@@ -10,15 +10,26 @@
 
 // #include <stdio.h>
 #include <iostream>
+#include "Perlin.hpp"
 
 #endif /* Noise_hpp */
 
-struct Perlin {
-    float freq;
+struct Noise {
+    
+    struct Module {
+        enum Type { Perlin, Invert };
+        Type type;
+        
+        void  printModuleType();
+        float getValue() const;
+    };
+    
+    struct Module modules[16];
+    int modulesCount = 0;
     
     explicit
-    Perlin(float f = 1.0) {
-        this -> freq = f;
+    Noise(Perlin p) {
+        //this -> modules[0] = m;
     }
     
     float getValue() const;

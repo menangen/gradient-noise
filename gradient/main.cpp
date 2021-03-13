@@ -3,14 +3,12 @@
 
 int main() {
 
-    Perlin x(3);
     
-    x.getValue();
-    
-    //Perlin n0;
+    Perlin perlin1;
     //Perlin n1;
-/*
-    Noise noise (&n0);
+
+    Noise noise (perlin1);
+    /*
     Noise noise2 (&n1);
 
     noise.addNoise(&noise2);

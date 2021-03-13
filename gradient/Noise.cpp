@@ -7,7 +7,7 @@
 
 #include "Noise.hpp"
 
-float Perlin::getValue() const {
-    std::cout << "Perlin::getValue return " << this -> freq << std::endl;
-    return this -> freq;
+float Noise::getValue() const {
+    std::cout << "Noise::getValue return " << std::endl;
+    return 0;
 }
