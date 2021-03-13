@@ -17,8 +17,21 @@
 struct Noise {
     
     struct Module {
-        enum Type { Perlin, Invert };
-        Type type;
+        enum Type { empty, perlinModule, invertModule };
+        
+        explicit
+        Module() {};
+        
+        explicit
+        Module(struct Perlin perlin) {
+            this -> noiseSource = perlin;
+            this -> type        = perlinModule;
+        };
+        
+        Type type = empty;
+        
+        struct
+        Perlin noiseSource = Perlin {};
         
         void  printModuleType();
         float getValue() const;
@@ -28,8 +41,9 @@ struct Noise {
     int modulesCount = 0;
     
     explicit
-    Noise(Perlin p) {
-        //this -> modules[0] = m;
+    Noise(struct Perlin p) {
+        auto m = Module(p);
+        this -> modules[0] = m;
     }
     
     float getValue() const;
