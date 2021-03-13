@@ -20,11 +20,10 @@ struct Noise {
 
         Type noiseType = empty;
         
-        struct
-        Perlin noise = Perlin {};
+        PerlinNoise noise = Perlin {};
         
         explicit
-        NoiseSource(struct Perlin noise) {
+        NoiseSource(PerlinNoise noise) {
             this -> noiseType = perlin;
             this -> noise     = noise;
         }
@@ -40,28 +39,27 @@ struct Noise {
         Module() {};
         
         explicit
-        Module(struct NoiseSource source) {
+        Module(Noise::NoiseSource source) {
             this -> noiseSource = source;
             this -> type        = perlinModule;
         };
         
         Type type = empty;
         
-        struct
-        NoiseSource noiseSource = NoiseSource {};
+        Noise::NoiseSource
+        noiseSource = NoiseSource {};
         
         void  printModuleType();
         float getValue() const;
     };
     
-    struct Module modules[16];
-    int modulesCount = 0;
+    Module modules[16];
+    char   modulesCount = 0;
     
     explicit
-    Noise(struct Perlin p) {
-        auto noiseSource = NoiseSource(p);
-        auto m = Module(noiseSource);
-        this -> modules[0] = m;
+    Noise(PerlinNoise p) {
+        auto noiseSource   = NoiseSource(p);
+        this -> modules[0] = Module(noiseSource);
     }
     
     float getValue() const;

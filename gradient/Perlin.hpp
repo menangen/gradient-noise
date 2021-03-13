@@ -22,3 +22,5 @@ struct Perlin {
     
     float getValue() const;
 };
+
+typedef Perlin PerlinNoise;
