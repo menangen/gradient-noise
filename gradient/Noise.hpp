@@ -33,12 +33,12 @@ struct Noise {
         NoiseSource
         noiseSource = NoiseSource {};
         
-        void  printModuleType();
+        void  printModuleType() const;
         float getValue() const;
     };
     
     Module modules[16];
-    char   modulesCount = 0;
+    uint   modulesCount = 0;
     
     explicit
     Noise(PerlinNoise p) {
