@@ -10,27 +10,11 @@
 
 // #include <stdio.h>
 #include <iostream>
-#include "Perlin.hpp"
+#include "NoiseSource.hpp"
 
 #endif /* Noise_hpp */
 
 struct Noise {
-    struct NoiseSource {
-        enum Type { empty, perlin };
-
-        Type noiseType = empty;
-        
-        PerlinNoise noise = Perlin {};
-        
-        explicit
-        NoiseSource(PerlinNoise noise) {
-            this -> noiseType = perlin;
-            this -> noise     = noise;
-        }
-        
-        explicit
-        NoiseSource() {};
-    };
     
     struct Module {
         enum Type { empty, perlinModule, invertModule };
@@ -39,14 +23,14 @@ struct Noise {
         Module() {};
         
         explicit
-        Module(Noise::NoiseSource source) {
+        Module(NoiseSource source) {
             this -> noiseSource = source;
             this -> type        = perlinModule;
         };
         
         Type type = empty;
         
-        Noise::NoiseSource
+        NoiseSource
         noiseSource = NoiseSource {};
         
         void  printModuleType();
