@@ -10,8 +10,6 @@
 
 #include <iostream>
 
-#endif /* Perlin_hpp */
-
 struct Perlin {
     float freq;
     
@@ -23,4 +21,5 @@ struct Perlin {
     float getValue() const;
 };
 
+#endif /* Perlin_hpp */
 typedef Perlin PerlinNoise;

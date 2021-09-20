@@ -7,47 +7,51 @@
 
 #include "Gradient.hpp"
 
-struct Gradient {
+void
+Gradient::printColors() {
+    for (Color color : this -> colors) {
+        if (color.isFull) { printf( "Position is %f, color: %f\n", color.position, color.color ); }
+        else break;
+    }
+}
+
+float
+Gradient::process(float value, Color first, Color second) {
+    std::cout <<
+    "Processing: \nfirst = { " << first.position << ", " << first.color <<
+    " }, second = { "         << second.position << ", " << second.color << " }\n";
     
-    uint8_t size = 2;
-    Color colors[16] = {
-        Color { -1.0, 0.0 },
-        Color {  1.0, 1.0 }
-    };
+    float d = second.position - first.position;
     
-    float process(float value, Color first, Color second) {
-        std::cout <<
-        "Processing: \nfirst = { " << first.position << ", " << first.color <<
-        " }, second = { "         << second.position << ", " << second.color << " }\n";
+    std::cout << "d = " << d << "\n";
+    
+    if (d == 0) {
+        return second.color;
+    }
+    else {
+        float alpha = value - first.position;
+        return Color::mix(first.color, second.color, alpha);
+    }
+}
+
+float
+Gradient::getColorAt(float value) {
+    Color first = colors[0];
+    Color second;
+    /*
+    for (uint8_t index = 0; index < size; index++) {
         
-        float d = second.position - first.position;
+        Color color = colors[index];
         
-        std::cout << "d = " << d << "\n";
+        second = color;
         
-        if (d == 0) {
-            return second.color;
-        }
-        else {
-            float alpha = value - first.position;
-            return Color::mix(first.color, second.color, alpha);
-        }
+        if ( value <= color.position ) { break; }
+        
+        first = color;
     }
     
-    float getColorAt(float value) {
-        Color first = colors[0];
-        Color second;
-        
-        for (uint8_t index = 0; index < size; index++) {
-            
-            Color color = colors[index];
-            
-            second = color;
-            
-            if ( value <= color.position ) { break; }
-            
-            first = color;
-        }
-        
-        return process(value, first, second);
-    }
-};
+    return process(value, first, second);
+    */
+    return 0.f;
+}
+

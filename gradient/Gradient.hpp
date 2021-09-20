@@ -9,15 +9,29 @@
 #define Gradient_hpp
 
 #include <iostream>
+#include "Color.hpp"
 
 #endif
 
-struct Color {
-    float position = 0.0;
-    float color = 0.5;
+struct Gradient {
     
-    static
-    float mix(float x, float y, float alpha) {
-        return x * ( 1 - alpha ) + y * alpha;
+    Color colors[16] = {
+        Color { -1.0, 0.0 },
+        Color {  1.0, 1.0 }
     };
+    
+    Gradient() { printf("Default Gradient init..." );};
+    
+    Gradient(Color palette[], size_t size) {
+        printf("Gradient from array of %lu Color's... \n", size );
+    };
+    
+    void
+    printColors();
+    
+    float
+    process(float value, Color first, Color second);
+    
+    float
+    getColorAt(float value);
 };
